@@ -7,6 +7,9 @@ import {
  } from '@mui/material';
 
 
+ import { useNavigate } from "react-router-dom"; // 추가
+
+
 
   {/* sm 화면이 아무리 커도 이 Container의 최대 너비는 약 600px까지만 허용한다 */}
   {/* 텍스트 아래쪽에 기본 여백(margin-bottom)을 자동으로 추가*/}
@@ -18,6 +21,15 @@ import {
 const Login=()=>{
 
   const [username,setUsername]=useState('');
+  const navigate = useNavigate();// 추가
+
+  const handleLogin =()=>{
+    if (username.trim()){
+      console.log('Logging in with:', username);
+      navigate ('/dashboard'); // 라우팅
+
+    }
+  };
   return (
   
     <Container maxWidth="sm"> 
@@ -38,6 +50,18 @@ variant="outlined"
 value={username}
 onChange={(e)=>setUsername(e.target.value)}
 />
+
+
+<Button
+ fullWidth
+ variant="contained"
+ sx={{mt:2}}
+ onClick={handleLogin}
+ disable={!username.trim()}
+
+>
+ 
+</Button>
 </Box>
     </Container>
 
