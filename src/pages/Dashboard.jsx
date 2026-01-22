@@ -9,6 +9,7 @@ Box
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar'; // 추가
 import Sidebar from '../components/Sidebar'; // 추가
+import BreadcrumbsNav from "../components/BreadcrumbsNav";// 추가
 
 
 
@@ -42,6 +43,8 @@ const handleSidebarClose=()=>{
 
     <Container>
       <Box sx={{mt:4}}>
+         {/* Breadcrumbs 추가 */}
+         <BreadcrumbsNav/>
       <Typography variant="h4">
         Dashboard
       </Typography>
