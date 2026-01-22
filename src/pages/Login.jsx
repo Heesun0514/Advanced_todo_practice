@@ -3,11 +3,23 @@ import {
   Container,
   Typography,
  TextField,
- Box
+ Box,
+ Button // 추가
  } from '@mui/material';
 
 
  import { useNavigate } from "react-router-dom"; // 추가
+
+ {/* 1. useNavigate import의 의미
+
+import { useNavigate } from 'react-router-dom';
+✔ 무엇을 하는 코드인가?
+react-router-dom 라이브러리에서 페이지 이동(라우팅)을 담당하는 함수를 가져옵니다.
+즉, 버튼 클릭이나 특정 조건이 만족되었을 때 다른 페이지로 이동할 수 있게 해줍니다.
+✔ 왜 필요한가?
+React는 기본적으로 페이지가 하나(Single Page Application) 이기 때문에
+HTML의 <a href=""> 대신 JavaScript로 화면 전환을 제어합니다.
+ */}
 
 
 
@@ -23,13 +35,46 @@ const Login=()=>{
   const [username,setUsername]=useState('');
   const navigate = useNavigate();// 추가
 
+
+{/* 2. const navigate = useNavigate(); 의 의미
+
+const navigate = useNavigate();
+✔ 무엇을 의미하는가?
+useNavigate()는 React Hook입니다.
+이 Hook을 실행하면 navigate라는 함수(function) 를 반환합니다.
+즉,
+navigate는 다른 페이지로 이동시키는 함수입니다.
+
+✔ 실제 사용 예
+
+navigate('/dashboard');
+👉 사용자가 /dashboard 경로로 이동하게 됩니다 */}
+
+
+
+{/*
+  3-1. username.trim()의 의미
+
+if (username.trim()) {
+trim()은 문자열 앞뒤의 공백을 제거합니다.
+예:
+
+"   " → "" (빈 문자열)
+👉 의미:
+사용자가 아무 것도 입력하지 않았거나 공백만 입력한 경우를 막기 위함입니다.
+
+*/}
   const handleLogin =()=>{
-    if (username.trim()){
+    if (username.trim()){ 
       console.log('Logging in with:', username);
-      navigate ('/dashboard'); // 라우팅
+      navigate ('/dashboard'); // 라우팅 / 조건이 만족되면 /dashboard 페이지로 이동한다
+
 
     }
   };
+  
+  
+  
   return (
   
     <Container maxWidth="sm"> 
@@ -54,13 +99,15 @@ onChange={(e)=>setUsername(e.target.value)}
 
 <Button
  fullWidth
- variant="contained"
+ variant="contained" // 배경색이 채워진 버튼
+
  sx={{mt:2}}
  onClick={handleLogin}
  disable={!username.trim()}
 
 >
  Login
+ 
 </Button>
 </Box>
     </Container>
