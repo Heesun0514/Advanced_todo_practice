@@ -66,10 +66,19 @@ trim()은 문자열 앞뒤의 공백을 제거합니다.
 */}
   const handleLogin =()=>{
     if (username.trim()){ 
-      console.log('Logging in with:', username);
+
+         // localStorage에 사용자 정보 저장
+      localStorage.setItem('user', username);
       navigate ('/dashboard'); // 라우팅 / 조건이 만족되면 /dashboard 페이지로 이동한다
 
 
+    }
+  };
+
+
+  const handleKeyPress=(e)=>{
+    if (e.key==='Enter'){
+      handleLogin();
     }
   };
   
@@ -92,8 +101,10 @@ trim()은 문자열 앞뒤의 공백을 제거합니다.
 fullWidth
 label="Username"
 variant="outlined"
+sx={{mt:2}}
 value={username}
 onChange={(e)=>setUsername(e.target.value)}
+onKeyPress ={handleKeyPress}
 />
 
 
@@ -107,7 +118,7 @@ onChange={(e)=>setUsername(e.target.value)}
 
 >
  Login
- 
+
 </Button>
 </Box>
     </Container>
