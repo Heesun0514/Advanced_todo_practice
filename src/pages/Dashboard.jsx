@@ -7,6 +7,7 @@ Box
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/Navbar'; // 추가
 
 
 const Dashboard=()=>{
@@ -23,12 +24,14 @@ const Dashboard=()=>{
 
   return (
 
-   
+    <>
+   <Navbar/>
     <Container>
       <Box sx={{mt:4}}>
       <Typography variant="h4">
         Dashboard
       </Typography>
+      
       <Typography variant="body1" sx={{mb:3}}>
         Welcome,{username}!
       </Typography>
@@ -41,7 +44,7 @@ onClick={handleLoggout}
 </Button>
       </Box>
     </Container>
-
+</>
   );
 };
 export default Dashboard;
