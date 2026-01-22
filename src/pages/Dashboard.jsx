@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState} from "react";  // useState 추가
 import { 
 Container,
 Typography,
@@ -13,6 +13,8 @@ import Navbar from '../components/Navbar'; // 추가
 const Dashboard=()=>{
   const navigate = useNavigate();
   const username=localStorage.getItem('user');
+  const [sidebarOpen,setSidebarOpen]=useState(false);// 사이드바 상태 추가
+  
 
   const handleLoggout=()=>{
     localStorage.removeItem('user');
@@ -20,20 +22,27 @@ const Dashboard=()=>{
     
   };
 
-
+const handleMenuClick=()=>{
+  console.log ('Menu clicked-sidebar will open');
+  setSidebarOpen(true); // 사이드바 열기
+}
 
   return (
 
     <>
-   <Navbar/>
+   <Navbar onMenuClick={handleMenuClick}/> {/* props 전달 */}
     <Container>
       <Box sx={{mt:4}}>
       <Typography variant="h4">
         Dashboard
       </Typography>
-      
+
       <Typography variant="body1" sx={{mb:3}}>
         Welcome,{username}!
+      </Typography>
+
+      <Typography color="text.secondar" sx={{mb:2}}>
+        Sidebar  상태:{sidebarOpen ? '열림':'닫힘'}
       </Typography>
 
 <Button
@@ -42,6 +51,7 @@ onClick={handleLoggout}
 >
   Logout
 </Button>
+
       </Box>
     </Container>
 </>
