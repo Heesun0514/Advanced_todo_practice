@@ -1,11 +1,12 @@
 import React from "react";
+import {Routes,Route} from 'react-router-dom'; // 추가
+import Login from "./pages/Login"; // 추가
 
 const App=()=>{
   return(
-    <div>
-      <h1>Advanced Todo App</h1>
-      <p>Application starting</p>
-    </div>
+   <Routes>
+    <Route path ="/" element={<Login/>}/>
+   </Routes>
   );
 };
 export default App;
