@@ -1,27 +1,51 @@
 import React from "react";
-import { AppBar,Toolbar,Typography } from "@mui/material";
+import {
+     AppBar,
+     Toolbar,
+     Typography,
+     IconButton,
+     Box 
 
-const Navbar=()=>{
+    } from "@mui/material";
+
+    import MenuIcon from '@mui/icons-material/Menu'; // 추가
+
+
+const Navbar=()=>({onMenuClick}) => {  // props 추가
     const username=localStorage.getItem('user') || 'User';
 
 
-{/*|| 'User'
-만약 localStorage에 값이 없으면 'User'로 기본값 사용
-즉, 사용자가 로그인하지 않았거나 정보가 없으면 기본적으로 "User"가 표시됩니다. */}
-
     return(
+ <AppBar position="static">
+   <Toolbar>
+     {/* 햄버거 메뉴 아이콘 */}
+     <IconButton
+     size="large"
+     edge="start"
+     color="inherit"
+     aria-label="menu"
+     onClick={onMenuClick} // 클릭 이벤트 연결
+     sx={{mr:2}}
+     >
+        
+        <MenuIcon />
+     </IconButton>
+    
+    
+    <Typography variant="h6" component="div" sx={{flexGrow:1}}>
+        Advanced Todo App
+    </Typography>
+    
+    <Box sx={{display:'flex', alignItems:'center'}}>
+    <Typography variant="body1">
+        {username}
+    </Typography>
+    </Box>
+</Toolbar>
 
-   <AppBar postion="static">
-    <Toolbar>
-<Typography variant="h6" component="div" sx={{flexGrow:1}}>
-    Advanced Todo App
-</Typography>
-<Typography variant="body1">
-    {username}
-</Typography>
-    </Toolbar>
-   </AppBar>
-    );
-};
+        </AppBar>
+
+    )
+}
 
 export default Navbar;
