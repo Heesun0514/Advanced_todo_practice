@@ -8,6 +8,8 @@ Box
 
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar'; // 추가
+import Sidebar from '../components/Sidebar'; // 추가
+
 
 
 const Dashboard=()=>{
@@ -27,10 +29,17 @@ const handleMenuClick=()=>{
   setSidebarOpen(true); // 사이드바 열기
 }
 
+
+const handleSidebarClose=()=>{
+  setSidebarOpen(false);
+}
   return (
 
     <>
    <Navbar onMenuClick={handleMenuClick}/> {/* props 전달 */}
+   <Sidebar open={sidebarOpen} onClose={handleSidebarClose}/> {/* 사이드바 추가 */}
+
+
     <Container>
       <Box sx={{mt:4}}>
       <Typography variant="h4">
