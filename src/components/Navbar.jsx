@@ -4,14 +4,16 @@ import {
      Toolbar,
      Typography,
      IconButton,
-     Box 
+     Box,
+     Avatar, // 추가
+     Tooltip  // 추가
 
     } from "@mui/material";
 
     import MenuIcon from '@mui/icons-material/Menu'; // 추가
 
 
-const Navbar=()=>({onMenuClick}) => {  // props 추가
+const Navbar=({onMenuClick}) => {  // props 추가
     const username=localStorage.getItem('user') || 'User';
 
 
@@ -37,9 +39,13 @@ const Navbar=()=>({onMenuClick}) => {  // props 추가
     </Typography>
     
     <Box sx={{display:'flex', alignItems:'center'}}>
-    <Typography variant="body1">
-        {username}
-    </Typography>
+        <Tooltip title={username}> {/* Tooltip 추가 */}
+            <Avatar>{username.charAt(0).toLocaleUpperCase()}  {/* Avatar 추가 */} {/* 첫 글자만 표시 */}
+
+           
+   
+     </Avatar>
+    </Tooltip>
     </Box>
 </Toolbar>
 
