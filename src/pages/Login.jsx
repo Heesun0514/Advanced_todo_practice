@@ -4,7 +4,8 @@ import {
   Typography,
  TextField,
  Box,
- Button // 추가
+ Button// 추가
+
  } from '@mui/material';
 
 
@@ -69,7 +70,7 @@ trim()은 문자열 앞뒤의 공백을 제거합니다.
 
          // localStorage에 사용자 정보 저장
       localStorage.setItem('user', username);
-      navigate ('/dashboard'); // 라우팅 / 조건이 만족되면 /dashboard 페이지로 이동한다
+      navigate ('/Dashboard'); // 라우팅 / 조건이 만족되면 /dashboard 페이지로 이동한다
 
 
     }
@@ -87,7 +88,17 @@ trim()은 문자열 앞뒤의 공백을 제거합니다.
   return (
   
     <Container maxWidth="sm"> 
-    <Box sx={{marginTop:8}}>
+    <Box 
+    
+    sx={{
+      marginTop:8,
+      display:'flex',
+      flexDirection :'column',
+      alignItems:'center',
+
+      }}>
+
+
 <Typography variant="h4" gutterBottom>
   Welcome
 </Typography>
@@ -120,6 +131,7 @@ onKeyPress ={handleKeyPress}
  Login
 
 </Button>
+
 </Box>
     </Container>
 
