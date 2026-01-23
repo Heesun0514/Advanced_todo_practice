@@ -3,7 +3,9 @@ import {
 Container,
 Typography,
 Button,
-Box
+Box,
+Card,  // 추가
+CardContent  // 추가
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -45,21 +47,25 @@ const handleSidebarClose=()=>{
       <Box sx={{mt:4}}>
          {/* Breadcrumbs 추가 */}
          <BreadcrumbsNav/>
-      <Typography variant="h4">
-        Dashboard
+
+
+          {/* Welcome Card 추가 */}
+          <Card>
+            <CardContent>
+      <Typography variant="h5" gutterBottom>
+        Welcome Back!
       </Typography>
 
       <Typography variant="body1" sx={{mb:3}}>
-        Welcome,{username}!
+        Welcome,{username}! Here's an overivew of your tasks
       </Typography>
-
-      <Typography color="text.secondar" sx={{mb:2}}>
-        Sidebar  상태:{sidebarOpen ? '열림':'닫힘'}
-      </Typography>
+      </CardContent>
+      </Card>
 
 <Button
 variant="outlined"
 onClick={handleLoggout}
+sx={{mt:2}}
 >
   Logout
 </Button>
