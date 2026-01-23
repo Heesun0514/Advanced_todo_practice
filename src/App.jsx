@@ -28,11 +28,11 @@ localStorage.getItem('user')
   return(
    <Routes>
     <Route path ="/" 
-    element={ isLoggedIn ? <Navigate to="/Dashboard" /> :<Login/>}
+    element={ isLoggedIn ? <Navigate to="/dashboard" /> :<Login/>}
     />
 
 
-    <Route path ="/Dashboard"
+    <Route path ="/dashboard"
      element={ isLoggedIn ? <Dashboard/> : <Navigate to= "/"/>}
      /> 
    </Routes>

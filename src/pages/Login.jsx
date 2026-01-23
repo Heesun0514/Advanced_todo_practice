@@ -77,62 +77,40 @@ trim()은 문자열 앞뒤의 공백을 제거합니다.
   };
 
 
-  const handleKeyPress=(e)=>{
-    if (e.key==='Enter'){
-      handleLogin();
-    }
-  };
-  
   
   
   return (
   
-    <Container maxWidth="sm"> 
-    <Box 
+    <Container maxWidth="sm" sx={{mt:10}}> 
     
-    sx={{
-      marginTop:8,
-      display:'flex',
-      flexDirection :'column',
-      alignItems:'center',
-
-      }}>
-
-
+  
 <Typography variant="h4" gutterBottom>
-  Welcome
+ Login
 </Typography>
-<Typography variant="body1" color="text.secondary">
-  Please endter your username to continue
-</Typography>
-
 
 
 <TextField
 fullWidth
 label="Username"
-variant="outlined"
-sx={{mt:2}}
-value={username}
 onChange={(e)=>setUsername(e.target.value)}
-onKeyPress ={handleKeyPress}
+
 />
 
 
 <Button
- fullWidth
+
  variant="contained" // 배경색이 채워진 버튼
 
  sx={{mt:2}}
  onClick={handleLogin}
- disable={!username.trim()}
+
 
 >
  Login
 
 </Button>
 
-</Box>
+
     </Container>
 
   );

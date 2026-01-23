@@ -22,23 +22,22 @@ const Navbar=({onMenuClick}) => {  // props 추가
    <Toolbar>
      {/* 햄버거 메뉴 아이콘 */}
      <IconButton
-     size="large"
+    
      edge="start"
      color="inherit"
-     aria-label="menu"
      onClick={onMenuClick} // 클릭 이벤트 연결
-     sx={{mr:2}}
+   
      >
         
         <MenuIcon />
      </IconButton>
     
     
-    <Typography variant="h6" component="div" sx={{flexGrow:1}}>
-        Advanced Todo App
+    <Typography variant="h6" sx={{flexGrow:1}}>
+        Dashboard
     </Typography>
     
-    <Box sx={{display:'flex', alignItems:'center'}}>
+   
         <Tooltip title={username}> {/* Tooltip 추가 */}
             <Avatar>{username.charAt(0).toLocaleUpperCase()}  {/* Avatar 추가 */} {/* 첫 글자만 표시 */}
 
@@ -46,7 +45,7 @@ const Navbar=({onMenuClick}) => {  // props 추가
    
      </Avatar>
     </Tooltip>
-    </Box>
+  
 </Toolbar>
 
         </AppBar>
