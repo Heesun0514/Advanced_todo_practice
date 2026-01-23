@@ -15,6 +15,7 @@ import {
 
 const Navbar=({onMenuClick}) => {  // props 추가
     const username=localStorage.getItem('user') || 'User';
+    const avatarUrl =`https://i.pravatar.cc/150?u=${username}`; //part 2 추가
 
 
     return(
@@ -39,11 +40,11 @@ const Navbar=({onMenuClick}) => {  // props 추가
     
    
         <Tooltip title={username}> {/* Tooltip 추가 */}
-            <Avatar>{username.charAt(0).toLocaleUpperCase()}  {/* Avatar 추가 */} {/* 첫 글자만 표시 */}
+            <Avatar src={avatarUrl}/> {/* part 1 추가 : 첫 글자만 표시:{username.charAt(0).toUpperCase()} */} {/* part 2 추가 : 고유한 아바타 이미지 생성*/}
 
            
    
-     </Avatar>
+   
     </Tooltip>
   
 </Toolbar>
