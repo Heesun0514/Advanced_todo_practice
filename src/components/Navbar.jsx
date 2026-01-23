@@ -4,7 +4,7 @@ import {
      Toolbar,
      Typography,
      IconButton,
-     Box,
+   
      Avatar, // 추가
      Tooltip  // 추가
 

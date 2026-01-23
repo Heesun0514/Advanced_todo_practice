@@ -1,5 +1,5 @@
 import React from "react";
-import {Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
+import {BrowserRouter, Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
 import Login from "./pages/Login"; // 추가
 import Dashboard from './pages/Dashboard';// 추가
 
@@ -26,7 +26,8 @@ localStorage.getItem('user')
 즉, isLoggedIn은 사용자가 로그인 상태인지 아닌지를 확인하는 변수입니다. */}
 
   return(
-   <Routes>
+   
+    <Routes>
     <Route path ="/" 
     element={ isLoggedIn ? <Navigate to="/dashboard" /> :<Login/>}
     />
@@ -35,7 +36,9 @@ localStorage.getItem('user')
     <Route path ="/dashboard"
      element={ isLoggedIn ? <Dashboard/> : <Navigate to= "/"/>}
      /> 
-   </Routes>
+     </Routes>
+    
+   
   );
 };
 export default App;
