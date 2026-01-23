@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar'; // 추가
 import Sidebar from '../components/Sidebar'; // 추가
 import BreadcrumbsNav from "../components/BreadcrumbsNav";// 추가
+import { DataGrid } from '@mui/x-data-grid';// 추가
 
 
 
@@ -20,6 +21,22 @@ const Dashboard=()=>{
   const username=localStorage.getItem('user');
   const [sidebarOpen,setSidebarOpen]=useState(false);// 사이드바 상태 추가
   
+ // DataGrid 데이터 준비
+ const rows = [ // 데이터 배열
+    { id: 1, task: 'Finish report', status: 'Done' },
+    { id: 2, task: 'Update website', status: 'Pending' },
+  ];
+
+  const columns = [ // 컬럼 정의
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'task', headerName: 'Task', width: 200 },
+    { field: 'status', headerName: 'Status', width: 150 },
+  ];
+
+
+
+
+
 
   const handleLoggout=()=>{
     localStorage.removeItem('user');
@@ -61,6 +78,19 @@ const handleSidebarClose=()=>{
       </Typography>
       </CardContent>
       </Card>
+
+ {/* DataGrid 추가 */}
+ 
+  <DataGrid
+  autoHeight
+  rows={rows}
+  columns={columns}
+  pageSize={5}  
+  />
+ 
+
+
+
 
 <Button
 variant="outlined"
