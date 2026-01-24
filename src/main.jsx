@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom/client';
 import App from './App.jsx';
 import {BrowserRouter} from 'react-router-dom'; // 추가
-import { AuthProvider } from './Context/Authcontext.jsx';
+import { AuthProvider } from './Context/Authcontext.jsx'; // 추가된 부분
+
 
 
 
