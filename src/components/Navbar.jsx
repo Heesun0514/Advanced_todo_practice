@@ -40,8 +40,12 @@ const Navbar=({onMenuClick}) => {  // props 추가
     
    
         <Tooltip title={username}> {/* Tooltip 추가 */}
-            <Avatar src={avatarUrl}/> {/* part 1 추가 : 첫 글자만 표시:{username.charAt(0).toUpperCase()} */} {/* part 2 추가 : 고유한 아바타 이미지 생성*/}
 
+
+            {/* part 1  <Avatar>{username.charAt(0).toUpperCase()}</Avatar>  */}
+            {/* part 2 추가 : 고유한 아바타 이미지 생성*/}
+
+            <Avatar src={avatarUrl}/>  
            
    
    
