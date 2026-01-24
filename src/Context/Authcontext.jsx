@@ -147,13 +147,24 @@ const user = JSON.parse(stored); // 객체
 
 
 
-    // 5. 로그아웃 함수
+    /*  5. 로그아웃 함수
   const logout = () => {
     localStorage.removeItem('user'); // 로컬스토리지에서 제거
 
     setUser('');// 상태 초기화
 
+  }; */
+
+
+  // part 4. 로그아웃 함수
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user'); // 현재 사용자 정보만 삭제
+
+   Navigate('/');
+
   };
+
 
 
 
