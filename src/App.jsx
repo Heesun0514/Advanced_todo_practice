@@ -2,40 +2,22 @@ import React from "react";
 import {BrowserRouter, Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
 import Login from "./pages/Login"; // 추가
 import Dashboard from './pages/Dashboard';// 추가
+import { useAuth } from "./Context/Authcontext"; // part 3추가
+import Signup from "./pages/Signup"; // part 4 추가
 
 const App=()=>{
   // localStorage에서 사용자 정보 확인
 
-const isLoggedIn=!!localStorage.getItem('user');
+  const {user}=useAuth(); // part 4 추가
 
-{/*const isLoggedIn = !!localStorage.getItem('user');
 
-✔ 의미
-
-localStorage.getItem('user')
-
-브라우저의 로컬 스토리지(localStorage) 에서 'user' 키 값을 가져옴
-사용자가 이전에 로그인한 정보가 저장되어 있다면, 그 값을 반환
-값이 없으면 null 반환
-
-!! (double exclamation)
-값을 불리언(Boolean) 으로 변환
-
-값이 있으면 true, 없으면 false
-
-즉, isLoggedIn은 사용자가 로그인 상태인지 아닌지를 확인하는 변수입니다. */}
 
   return(
    
     <Routes>
-    <Route path ="/" 
-    element={ isLoggedIn ? <Navigate to="/dashboard" /> :<Login/>}
-    />
-
-
-    <Route path ="/dashboard"
-     element={ isLoggedIn ? <Dashboard/> : <Navigate to= "/"/>}
-     /> 
+   <Route path="/" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/" />} />
      </Routes>
     
    
