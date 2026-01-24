@@ -1,4 +1,4 @@
-import React ,{useEffect, useState} from "react";  // useState 추가
+import React ,{useState} from "react";  // useState 추가
 import { 
 
 Typography,
@@ -17,10 +17,12 @@ import { DataGrid } from '@mui/x-data-grid';// 추가
 import {Button,Dialog,DialogActions,DialogContent,DialogTitle,TextField} from '@mui/material'; // part 3 추가
 import AddIcon from '@mui/icons-material/Add'; // part 3 추가
 
+import { useAuth } from "../Context/Authcontext"; // part 4 추가
 
 
-
-
+{/* part 3
+  
+  
 const Dashboard=()=>{
  
   // 🔴 part 1 하드코딩된 정적 데이터,  사이드바 상태 (기존)
@@ -88,10 +90,6 @@ true ? 'Done' : 'Pending'
 API 데이터 형식: boolean (true/false)
 UI 표시 형식: string ("Done"/"Pending")
 가독성: 사용자가 이해하기 쉬운 형태로 표시
-
-
-*/
-
 
 
 
@@ -184,7 +182,7 @@ const handleAddTask = () => {
         실제 동작: {...data, id: prev.length + 1}에서 id가 덮어써짐
 
          
-         */ 
+        
           
       setRows(prev => [...prev, { ...data, id: prev.length + 1 }]);
 
@@ -192,25 +190,49 @@ const handleAddTask = () => {
       setOpenDialog(false);
 
       setNewTask('');
-    });
-};
 
 
+ */}
+
+ const Dashboard=()=>{
+  const [open,setOpen]=useState(false);
+
+   // ✅ Part 4: AuthContext 사용
+
+  const {user} =useAuth();
+  const {logout}=useAuth();
+
+const rows = [
+    { id: 1, task: 'Finish report', status: 'Done' },
+    { id: 2, task: 'Update website', status: 'Pending' },
+  ];
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'task', headerName: 'Task', width: 200 },
+    { field: 'status', headerName: 'Status', width: 150 },
+  ];
+
+
+ 
+
+
+  
+ {/* part 3 
 
   return (
 
     <>
    <Navbar onMenuClick={()=>setOpen(true)}/>
-   <Sidebar open={open} onClose={()=>setOpen(false)}/> {/* 사이드바 추가 */}
+   <Sidebar open={open} onClose={()=>setOpen(false)}/>  사이드바 추가 
 
 
     
       <Box sx={{p:2}}>
-         {/* Breadcrumbs 추가 */}
+          Breadcrumbs 추가 
          <BreadcrumbsNav/>
 
 
-          {/* Welcome Card 추가 */}
+          Welcome Card 추가 
           <Card sx={{mb:3}}>
             <CardContent>
       <Typography variant="h5">
@@ -224,7 +246,7 @@ const handleAddTask = () => {
       </Card>
 
 
-  {/* part 3: ✅ Add Task 버튼 추가 (DataGrid 위에) */}
+   part 3: ✅ Add Task 버튼 추가 (DataGrid 위에) 
 <Button
 variant="contained"
 startIcon={<AddIcon/>}
@@ -234,7 +256,7 @@ sx={{mb:2}}
   Add Task
 </Button>
 
-{/* part 3:  ✅ Add Task 모달 추가 */} 
+part 3:  ✅ Add Task 모달 추가 
 <Dialog open={openDialog} onClose={()=>setOpenDialog(false)}>
   <DialogTitle>Add New Task</DialogTitle>
     <DialogContent>
@@ -257,6 +279,72 @@ onChange={e=>setNewTask(e.target.value)}
       </Button>
     </DialogActions>
 </Dialog>
+
+
+
+
+
+ DataGrid 추가 
+ 
+  <DataGrid
+  autoHeight
+  rows={rows}
+  columns={columns}
+  pageSize={5}  
+  />
+ 
+
+      </Box>
+   
+</>
+  );
+};
+  
+  */}
+
+
+
+  return (
+
+    <>
+   <Navbar onMenuClick={()=>setOpen(true)}/>
+   <Sidebar open={open} onClose={()=>setOpen(false)}/> {/* 사이드바 추가 */}
+
+
+    
+      <Box sx={{p:2}}>
+
+
+{/*  part 4 : user?.username 옵셔널 체이닝 (Optional Chaining)
+
+      user 객체가 존재하면 username 속성 값을 가져오고, 
+      존재하지 않으면 undefined를 반환해라"
+      안전하게 사용자 이름에 접근하라
+ */}
+
+        <Typography>Welcome,{user?.username}</Typography>
+
+{/* part 4 :  로그아웃 버튼 직접 추가*/}
+
+<Button variant="contained" color="secondary" onClick>={logout}Logout</Button>
+
+
+         {/* Breadcrumbs 추가 */}
+         <BreadcrumbsNav/>
+
+
+          {/* Welcome Card 추가 */}
+          <Card sx={{mb:3}}>
+            <CardContent>
+      <Typography variant="h5">
+        Welcome Back!
+      </Typography>
+
+      <Typography variant="body1">
+       Here are your tasks :
+      </Typography>
+      </CardContent>
+      </Card>
 
 
 
