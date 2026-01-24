@@ -5,7 +5,8 @@ Typography,
 
 Box,
 Card,  // 추가
-CardContent  // 추가
+CardContent,  // 추가
+
 } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,10 @@ import Navbar from "../components/Navbar";
 import Sidebar from '../components/Sidebar'; // 추가
 import BreadcrumbsNav from "../components/BreadcrumbsNav";// 추가
 import { DataGrid } from '@mui/x-data-grid';// 추가
+import {Button,Dialog,DialogActions,DialogContent,DialogTitle,TextField} from '@mui/material'; // part 3 추가
+import AddIcon from '@mui/icons-material/Add'; // part 3 추가
+
+
 
 
 
