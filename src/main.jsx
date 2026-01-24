@@ -8,13 +8,14 @@ import { AuthProvider } from './Context/Authcontext.jsx'; // 추가된 부분
 
 
 ReactDom.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  //<React.StrictMode> //  part 4 delete 
     <BrowserRouter> {/* 추가 */}
     <AuthProvider>   {/* Part 3 : 앱 전체를 AuthProvider로 감쌈 */}
     <App/>
     </AuthProvider>
-    </BrowserRouter> {/* 추가 */}
-  </React.StrictMode>
+    </BrowserRouter> 
+
+ // </React.StrictMode>
 );
 
 

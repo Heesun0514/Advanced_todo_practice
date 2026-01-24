@@ -5,7 +5,7 @@
 
 import React,{useState} from "react";
 import { useAuth } from "../Context/Authcontext";
-import { Container, TextField, Typography } from "@mui/material";
+import { Container, TextField, Typography,Button } from "@mui/material";
 
 
 const Signup=()=>{
@@ -19,7 +19,7 @@ const [password,setPassword]=useState('');
   // 3. 사용자 정보 저장
   // 4. 자동 로그인
 
-const {signup} = useAuth;  
+const {signup} = useAuth();  
 
 
 
@@ -30,7 +30,7 @@ const handleSubmit=(e)=>{
 
   signup(username.trim(),password) //사용자명에서 공백 제거,입력된 비밀번호 전달
 
-
+};
 
 
   return (
@@ -46,5 +46,4 @@ const handleSubmit=(e)=>{
   )
 };
 
-};
 export default Signup;

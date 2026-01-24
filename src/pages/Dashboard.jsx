@@ -326,7 +326,7 @@ onChange={e=>setNewTask(e.target.value)}
 
 {/* part 4 :  로그아웃 버튼 직접 추가*/}
 
-<Button variant="contained" color="secondary" onClick>={logout}Logout</Button>
+<Button variant="contained" color="secondary" onClick={logout}>Logout</Button>
 
 
          {/* Breadcrumbs 추가 */}

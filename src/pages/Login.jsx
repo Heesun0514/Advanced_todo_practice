@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
  TextField,
- Box,
  Button// 추가
 
  } from '@mui/material';
@@ -96,7 +95,7 @@ const handleSubmit=(e)=>{
   //"브라우저의 기본 폼 제출 동작(페이지 새로고침)을 막아라"
   e.preventDefault(); 
 
-  signup(username.trim(),password) //사용자명에서 공백 제거,입력된 비밀번호 전달
+  login(username.trim(),password) //사용자명에서 공백 제거,입력된 비밀번호 전달
 
 };
 
@@ -128,12 +127,14 @@ marginTop: 8 / 8 × 8px = 64px/ Box의 위쪽에 64픽셀의 여백
   
   return (
      <Container>
-       <Typography variant="h5">Sign up</Typography>
+       <Typography variant="h5">Login</Typography>
        <form onSubmit={handleSubmit}>
          <TextField label="Username" fullWidth margin="normal" onChange={e=>setUsername(e.target.value)}/>
          <TextField label="Password" type="password" fullWidth margin="normal" onChange={e=>setPassword(e.target.value)}/>
          <Button type="submit" variant="contained" fullWidth>Login</Button>
-         <Typography variant="body2" mt={2}>No account? <Link to="/signup">Sign up</Link></Typography>
+         <Typography variant="body2" mt={2}>
+          No account? <Link to="/signup">Sign up</Link>
+          </Typography>
  
        </form>
      </Container>

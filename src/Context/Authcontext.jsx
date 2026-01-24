@@ -179,7 +179,7 @@ users.push({username,password:hashed});
 
 
  // 5. localStorage에 저장
- localStorage.setItem('user',JSON.stringify(users));
+ localStorage.setItem('users',JSON.stringify(users));
 
 
   // 6. 자동 로그인

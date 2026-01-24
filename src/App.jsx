@@ -1,9 +1,9 @@
 import React from "react";
-import {BrowserRouter, Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
-import Login from "./pages/Login"; // 추가
+import { Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
+import Login from "./pages/Login";// 추가
 import Dashboard from './pages/Dashboard';// 추가
 import { useAuth } from "./Context/Authcontext"; // part 3추가
-import Signup from "./pages/Signup"; // part 4 추가
+import Signup from "./pages/Signup";// part 4 추가
 
 const App=()=>{
   // localStorage에서 사용자 정보 확인
