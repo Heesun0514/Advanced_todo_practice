@@ -9,7 +9,6 @@ import {
  } from '@mui/material';
 
 
- import { useNavigate } from "react-router-dom"; // 추가
 
  {/* 1. useNavigate import의 의미
 
@@ -23,21 +22,26 @@ HTML의 <a href=""> 대신 JavaScript로 화면 전환을 제어합니다.
  */}
 
 
+ import { useNavigate } from "react-router-dom"; // 추가
 
-  {/* sm 화면이 아무리 커도 이 Container의 최대 너비는 약 600px까지만 허용한다 */}
-  {/* 텍스트 아래쪽에 기본 여백(margin-bottom)을 자동으로 추가*/}
-  {/* sx는 Material UI 전용 스타일 속성(system prop) */}
-  {/* marginTop → 위쪽 여백 */}
-  {/*  MUI spacing 규칙 /기본값: 1 = 8px /
-     marginTop: 8 / 8 × 8px = 64px/ Box의 위쪽에 64픽셀의 여백 */}
 
+
+
+ // part 3 추가 
+
+
+ import { useAuth } from "../Context/Authcontext";
+
+ 
+
+ 
 const Login=()=>{
 
   const [username,setUsername]=useState('');
-  const navigate = useNavigate();// 추가
 
 
-{/* 2. const navigate = useNavigate(); 의 의미
+
+  {/* 2. const navigate = useNavigate(); 의 의미
 
 const navigate = useNavigate();
 ✔ 무엇을 의미하는가?
@@ -50,26 +54,33 @@ navigate는 다른 페이지로 이동시키는 함수입니다.
 
 navigate('/dashboard');
 👉 사용자가 /dashboard 경로로 이동하게 됩니다 */}
+  const navigate = useNavigate();// 추가
+
+
+  // part 3: Context API 사용, AuthContext에서 가져옴
+  const {login} = useAuth(); 
 
 
 
-{/*
-  3-1. username.trim()의 의미
 
-if (username.trim()) {
-trim()은 문자열 앞뒤의 공백을 제거합니다.
-예:
 
-"   " → "" (빈 문자열)
-👉 의미:
-사용자가 아무 것도 입력하지 않았거나 공백만 입력한 경우를 막기 위함입니다.
 
-*/}
+
+
+
   const handleLogin =()=>{
-    if (username.trim()){ 
+    if (username){ 
 
-         // localStorage에 사용자 정보 저장
-      localStorage.setItem('user', username);
+         // Context의 login 함수 호출
+         /*
+         
+         관심사 분리: 로그인 로직이 AuthContext에 캡슐화됨
+일관성: 모든 컴포넌트가 동일한 방식으로 로그인 처리
+유지보수: 로직 변경 시 한 곳만 수정하면 됨
+         
+         */
+
+      login(username);
       navigate ('/dashboard'); // 라우팅 / 조건이 만족되면 /dashboard 페이지로 이동한다
 
 
@@ -121,3 +132,11 @@ export default Login;
 
 {/* fullWidth:  입력창(TextField)의 너비를 부모 요소의 100%로 설정한다 --> 부모 요소: <Container maxWidth="sm">
 결과: 입력창이 Container의 가로 폭 전체를 차지*/}
+
+
+ {/* sm 화면이 아무리 커도 이 Container의 최대 너비는 약 600px까지만 허용한다 */}
+  {/* 텍스트 아래쪽에 기본 여백(margin-bottom)을 자동으로 추가*/}
+  {/* sx는 Material UI 전용 스타일 속성(system prop) */}
+  {/* marginTop → 위쪽 여백 */}
+  {/*  MUI spacing 규칙 /기본값: 1 = 8px /
+     marginTop: 8 / 8 × 8px = 64px/ Box의 위쪽에 64픽셀의 여백 */}
