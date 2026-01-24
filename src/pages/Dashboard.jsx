@@ -225,9 +225,41 @@ const handleAddTask = () => {
 
 
   {/* part 3: ✅ Add Task 버튼 추가 (DataGrid 위에) */}
-<Button>
+<Button
+variant="contained"
+startIcon={<AddIcon/>}
+onClick={()=>setOpenDialog(true)}
+sx={{mb:2}}
+>
   Add Task
 </Button>
+
+{/* part 3:  ✅ Add Task 모달 추가 */} 
+<Dialog open={openDialog} onClose={()=>setOpenDialog(false)}>
+  <DialogTitle>Add New Task</DialogTitle>
+    <DialogContent>
+<TextField
+autoFocus
+margin="dense"
+label="Task Title"
+fullWidth
+variant="outlined"
+onChange={e=>setNewTask(e.target.value)}
+
+/>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={()=>setOpenDialog(false)}>
+        Cancel
+      </Button>
+      <Button onClick={handleAddTask}>
+        Add
+      </Button>
+    </DialogActions>
+</Dialog>
+
+
+
 
 
  {/*  DataGrid 추가 */}
