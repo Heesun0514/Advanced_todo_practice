@@ -1,54 +1,50 @@
-import bcrypt from "bcryptjs";
-import React from "react";
 
 
 
 
 
-Signup=(username,password)=>{
+import React,{useState} from "react";
+import { useAuth } from "../Context/Authcontext";
+import { Container, TextField, Typography } from "@mui/material";
+
+
+const Signup=()=>{
+const [username,setUsername]=useState('');
+const [password,setPassword]=useState('');
+
+
+// 이 signup 함수를 가져옴
+ // 1. 중복 체크
+ // 2. 비밀번호 암호화
+  // 3. 사용자 정보 저장
+  // 4. 자동 로그인
+
+const {signup} = useAuth;  
+
+
+
+const handleSubmit=(e)=>{
+
+  //"브라우저의 기본 폼 제출 동작(페이지 새로고침)을 막아라"
+  e.preventDefault(); 
+
+  signup(username.trim(),password) //사용자명에서 공백 제거,입력된 비밀번호 전달
 
 
 
 
-    // 1. 기존 사용자 목록 가져오기
+  return (
+    <Container>
+      <Typography variant="h5">Sign up</Typography>
+      <form onSubmit={handleSubmit}>
+        <TextField label="Username" fullWidth margin="normal" onChange={e=>setUsername(e.target.value)}/>
+        <TextField label="Password" type="password" fullWidth margin="normal" onChange={e=>setPassword(e.target.value)}/>
+        <Button type="submit" variant="contained" fullWidth>Sign up</Button>
 
-const users = JSON.parse(localStorage.getItem('users'))||[];
+      </form>
+    </Container>
+  )
+};
 
-
- // 2. 중복 사용자 체크
-
- const exsiting = users.find(u=>u.username===username);
- if (exsiting){
-    alert('User already exists');
-    return;
- }
-
-// 3. 비밀번호 암호화
-// bcrypt.hashSync(평문비밀번호, salt라운드)
-// salt 라운드 10: 해싱 강도 (높을수록 강력하지만 느림)
-// 결과: "$2a$10$N9qo8uLOickgx2ZMRZoMye..."
-
-
-const hashed = bcrypt.hashSync(password,10);
-
-
-// 4. 새 사용자 추가
-// 평문 비밀번호 대신 해시된 비밀번호 저장
-// 예: { username: "john", password: "$2a$10$N9qo8uLOickgx2ZMRZoMye..." }
-users.push({username,password:hashed});
-
-
- // 5. localStorage에 저장
- localStorage.setItem('user',JSON.stringify(users));
-
-
-  // 6. 자동 로그인
-  Login(username,password)
-
-
-
-
-
-  
 };
 export default Signup;

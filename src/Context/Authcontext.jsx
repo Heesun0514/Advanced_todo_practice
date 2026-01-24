@@ -1,4 +1,3 @@
-import React from 'react';
 
 /*
 
@@ -23,12 +22,9 @@ const { user, login, logout } = useAuth();
 
 
 // src/context/AuthContext.jsx
-import { createContext, useContext, useState } from 'react';
+import React,{ createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // part 4 추가 logout 헤서 login page 가기 위해서
-
-
 import bcrypt from 'bcryptjs'// part 4 
-import { found } from '../../node_modules/.vite/deps_temp_026b0709/react-router-dom';
 
 
 
@@ -52,11 +48,11 @@ export const AuthProvider = ({ children }) => {
   있으면 JSON 객체로 변환하고 없으면 null로 user 상태를 초기화하라."
  */
 
-  const [user,setUser]=useState(()=>{
-    const stored=localStorage.getItem('user');
-     return stored ?JSON.parse(stored):null;
-  });
 
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) : null;
+  });
 
   const navigate=useNavigate(); // part 4 :  navigate 함수 얻기
 
@@ -134,7 +130,7 @@ const user = JSON.parse(stored); // 객체
         // JSON.stringify(): 객체 → 문자열 변환
         setUser({username});
         localStorage.setItem('user',JSON.stringify({username}));
-        Navigate('/dashboard');
+        navigate('/dashboard');
      } else {
         alert ('Invalid credentials')
      };
@@ -147,6 +143,49 @@ const user = JSON.parse(stored); // 객체
 
 
 
+ 
+
+const signup=(username,password)=>{
+
+
+
+
+    // 1. 기존 사용자 목록 가져오기
+
+const users = JSON.parse(localStorage.getItem('users'))||[];
+
+
+ // 2. 중복 사용자 체크
+
+ const exsiting = users.find(u=>u.username===username);
+ if (exsiting){
+    alert('User already exists');
+    return;
+ }
+
+// 3. 비밀번호 암호화
+// bcrypt.hashSync(평문비밀번호, salt라운드)
+// salt 라운드 10: 해싱 강도 (높을수록 강력하지만 느림)
+// 결과: "$2a$10$N9qo8uLOickgx2ZMRZoMye..."
+
+
+const hashed = bcrypt.hashSync(password,10);
+
+
+// 4. 새 사용자 추가
+// 평문 비밀번호 대신 해시된 비밀번호 저장
+// 예: { username: "john", password: "$2a$10$N9qo8uLOickgx2ZMRZoMye..." }
+users.push({username,password:hashed});
+
+
+ // 5. localStorage에 저장
+ localStorage.setItem('user',JSON.stringify(users));
+
+
+  // 6. 자동 로그인
+  login(username,password)
+
+};
 
 
 
@@ -173,7 +212,7 @@ const user = JSON.parse(stored); // 객체
 
     // 6. Context Provider로 감싸기
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout,signup }}>
       {children}
     </AuthContext.Provider>
   );
