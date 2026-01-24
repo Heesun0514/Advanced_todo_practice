@@ -24,6 +24,8 @@ const { user, login, logout } = useAuth();
 
 // src/context/AuthContext.jsx
 import { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // part 4 추가 logout 헤서 login page 가기 위해서
+
 
 import bcrypt from 'bcryptjs'// part 4 
 import { found } from '../../node_modules/.vite/deps_temp_026b0709/react-router-dom';
@@ -50,12 +52,13 @@ export const AuthProvider = ({ children }) => {
   있으면 JSON 객체로 변환하고 없으면 null로 user 상태를 초기화하라."
  */
 
-  const [user,setUser]=userState(()=>{
+  const [user,setUser]=useState(()=>{
     const stored=localStorage.getItem('user');
      return stored ?JSON.parse(stored):null;
   });
 
 
+  const navigate=useNavigate(); // part 4 :  navigate 함수 얻기
 
     /*
     part 3.
@@ -158,10 +161,10 @@ const user = JSON.parse(stored); // 객체
 
   // part 4. 로그아웃 함수
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user'); // 현재 사용자 정보만 삭제
+    setUser(null); // "사용자(user) 상태를 null(없음)으로 설정해라"
+    localStorage.removeItem('user'); // 현재 사용자 정보만 삭제,"브라우저 저장소에서 'user'라는 이름으로 저장된 정보를 삭제해라"
 
-   Navigate('/');
+   navigate('/'); // "사용자를  로그인 페이지(/)로 이동시켜라"
 
   };
 
