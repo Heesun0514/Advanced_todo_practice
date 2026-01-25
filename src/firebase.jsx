@@ -6,7 +6,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA8QuKv7z5t2wDZUWld4Ue5MqRf3guXZbs",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY, ,
   authDomain: "advtodo-9a486.firebaseapp.com",
   projectId: "advtodo-9a486",
   storageBucket: "advtodo-9a486.firebasestorage.app",

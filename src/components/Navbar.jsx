@@ -4,7 +4,7 @@ import {
      Toolbar,
      Typography,
      IconButton,
-   
+   Button,
      Avatar, // 추가
      Tooltip  // 추가
 
@@ -64,7 +64,7 @@ const {user,logout}=useAuth();
  <AppBar position="static">
    <Toolbar>
      {/* 햄버거 메뉴 아이콘 */}
-     <IconButton edge="start" color="inherit" onClick={onMenuClick}> // 클릭 이벤트 연결
+     <IconButton edge="start" color="inherit" onClick={onMenuClick}> 
      <MenuIcon />
      </IconButton>
      <Typography variant="h6" sx={{flexGrow:1}}> Dashboard </Typography>
@@ -73,6 +73,15 @@ const {user,logout}=useAuth();
         <>
    <Tooltip title={user.email}>
 
+{/*
+
+ser.photoURL (실제 프로필 사진) 있으면 사용
+없으면 이메일 첫 글자 표시 ({user.email?.[0]})
+|| undefined: photoURL이 null일 때 undefined로 설정
+
+
+
+*/}
    <Avatar src={user.photoURL || undefined}>{user.email?.[0]}</Avatar>
       </Tooltip>
       <Button color="inherit" onClick={logout}>Logout</Button>
