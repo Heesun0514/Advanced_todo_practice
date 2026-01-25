@@ -1,14 +1,14 @@
 import { createContext,useContext,useEffect,useState } from "react";
 import {auth} from '../firebase'; // firebase.js에서 초기화된 인증 객체
+import React from "react";
 
 
 
 
 // onAuthStateChanged: 사용자 인증 상태 변화 감지 함수
 // signOut: 로그아웃 함수
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import {onAuthStatechanged,signOut} from 'firebase/auth'; 
-import { AuthProvider } from './Authcontext';
 
 
 //공유 가능한 데이터 상자" 생성
@@ -26,7 +26,7 @@ export const AuthProvider=({children})=>{
 // null: 로그인하지 않은 상태
 // user 객체: 로그인한 사용자 정보
 
-  const [user,setUser]=userState(null);
+  const [user,setUser]=useState(null);
 
 
 
@@ -52,7 +52,7 @@ Firebase 인증 상태 변경 감지 시작
   */
    
 
-  const unsubscribe=onAuthStatechanged(auth,setUser);
+  const unsubscribe= onAuthStateChanged (auth,setUser);
 
 
     // 🔴 2. 언마운트 시 실행되는 함수 반환

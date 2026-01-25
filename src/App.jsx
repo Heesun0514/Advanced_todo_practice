@@ -2,7 +2,7 @@ import React from "react";
 import { Routes,Route,Navigate} from 'react-router-dom'; // 추가 // // Navigate 추가
 import Login from "./pages/Login";// 추가
 import Dashboard from './pages/Dashboard';// 추가
-import { useAuth } from "./Context/Authcontext"; // part 3추가
+import { useAuth } from "./Context/Authcontext";
 import Signup from "./pages/Signup";// part 4 추가
 
 const App=()=>{

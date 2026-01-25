@@ -28,18 +28,49 @@ HTML의 <a href=""> 대신 JavaScript로 화면 전환을 제어합니다.
 
 
 
- // part 3 추가 
- import { useAuth } from "../Context/Authcontext";
+ // part 3 추가 ✅ Context API 사용 ,part 5 delete
 
- // part 4 추가 
- import {Link} from 'react-router-dom'; 
+ // import { useAuth } from "../Context/Authcontext";
+
+ // part 4 추가 , part 5 delete
+ // import {Link} from 'react-router-dom'; 
+
+
+
+
+
+ /*
+ 
+ part 5
+Context API 의존성 제거 → Firebase 직접 호출
+useAuth() 제거 → Firebase SDK 직접 사용
 
  
+ */ 
+ //part 5 추가 
+ import { useNavigate } from "react-router-dom"; 
+ 
+ // ✅ Firebase 함수 직접 임포트
+
+ import { signInWithEmailAndPassword,signInWithPopup } from "firebase/auth";
+ import {auth,googleProvider} from '../firebase'
 
  
 const Login=()=>{
 
-  const [username,setUsername]=useState('');
+  // const [username,setUsername]=useState(''); "username" 사용
+  // part 5 delete
+
+
+  // part 5 , "email"로 변경
+  /*
+  
+  Firebase는 이메일을 기본 식별자로 사용
+  사용자명 대신 이메일로 인증 통일
+
+  
+  */
+  const[email,setEmail]=useState('');
 
 
 
@@ -61,8 +92,8 @@ navigate('/dashboard');
   // part 4 
 const [password,setPassword]=useState('');
 
-  // part 3: Context API 사용, AuthContext에서 가져옴
-  const {login} = useAuth(); 
+  // part 3: Context API 사용, AuthContext에서 가져옴 
+  // const {login} = useAuth();  part 5 delete
 
 
 
@@ -90,14 +121,68 @@ const [password,setPassword]=useState('');
   }; */}
 
 
-const handleSubmit=(e)=>{
+  const navigate = useNavigate(); //  페이지 이동을 관리하는 훅
+
+
+
+
+
+  {/* part 5 delete 
+    
+    const handleSubmit=(e)=>{
 
   //"브라우저의 기본 폼 제출 동작(페이지 새로고침)을 막아라"
   e.preventDefault(); 
 
   login(username.trim(),password) //사용자명에서 공백 제거,입력된 비밀번호 전달
 
+    */}
+
+
+
+    /*
+    
+    책임 분리: 인증 로직이 AuthContext에서 Login 컴포넌트로 이동
+    직접성: Firebase SDK를 직접 호출하여 중간 계층 제거
+    에러 처리: try-catch로 명확한 에러 처리
+    
+    */
+const handleEmailLogin=async()=>{
+  try {
+
+
+    // 1. Firebase 함수 직접 호출
+
+    await signInWithEmailAndPassword(auth,email,password);
+
+
+      // 2. 컴포넌트에서 직접 navigate 처리
+
+    navigate('/dashboard');
+  } catch (err) {
+    alert (err.message);
+  }
 };
+
+
+/*
+Firebase의 강력한 기능 활용
+사용자 편의성 증대 (비밀번호 불필요)
+다양한 인증 방식 지원 시작
+
+*/
+const handleGoogleLogin =async()=>{
+  try{
+    await signInWithPopup(auth,googleProvider);
+    navigate('/dashboard');
+  } catch(err){
+    alert(err.message);
+  }
+};
+
+
+
+
 
 
   {/* part 3 
@@ -125,6 +210,9 @@ marginTop: 8 / 8 × 8px = 64px/ Box의 위쪽에 64픽셀의 여백
 
 */}
   
+
+{/* part 4
+
   return (
      <Container>
        <Typography variant="h5">Login</Typography>
@@ -137,6 +225,27 @@ marginTop: 8 / 8 × 8px = 64px/ Box의 위쪽에 64픽셀의 여백
           </Typography>
  
        </form>
+     </Container>
+   )
+ };
+ 
+  
+  
+  
+  
+  
+  */}
+  return (
+     <Container maxWidth="sm" sx={{mt:10}}>
+       <Typography variant="h4">Login</Typography>
+     
+         <TextField fullWidth label="Email" onChange={e=>setUsername(e.target.value)}/>
+         <TextField fullWidth label="Password" type="password" sx={{mt:2}} onChange={e=>setPassword(e.target.value)}/>
+         <Button fullWidth variant="contained" sx={{mt:2}} onClick={handleEmailLogin}>Login</Button>
+         <Button fullWidth variant="outlined" sx={{mt:2}} onClick={handleGoogleLogin}>Login with Google</Button>
+        
+ 
+  
      </Container>
    )
  };
